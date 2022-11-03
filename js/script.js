@@ -9,7 +9,9 @@ const app = createApp({
             activeChat: 0,
             newMessage: '',
             searchTerm: '',
-            
+            randomMessage: [
+                'Va bene', 'Si, ah?', 'No, tu?', 'Ci vediamo sta sera?', 'Bene, tu?', 'Quando ci vediamo?', 'Andiamo al River?', 'Che si fa sta sera?', 'Ok, perfetto', 'Non saprei'
+            ],
             contacts: [
                 {
                     id: 1,
@@ -249,13 +251,13 @@ const app = createApp({
                 const newMsg = {
                     date: newDate,
                     hours: hours + ':' + minutes,
-                    message: 'ok',
+                    message: this.randomMessage[randomNumber(0,9)],
                     status: 'received'
                 }
                 this.contacts[this.activeChat].messages.push(newMsg);
             }, 2000)
         },
-        
+
 
     },
     computed: {
@@ -268,7 +270,7 @@ const app = createApp({
 
     },
     mounted() {
-
+        console.log(this.randomMessage)
     }
 }).mount('#app')
 
