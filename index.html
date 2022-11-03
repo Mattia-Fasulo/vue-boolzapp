@@ -6,7 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- fontawesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +29,8 @@
 
 <body>
 
-  
-  <div class="wrapper">
+
+  <div id="app" class="wrapper">
     <!-- all chat -->
     <div class="all-chat">
 
@@ -39,12 +41,12 @@
         <div class="my-profile">
           <div class="my-profile-img">
             <img src="img/avatar_io.jpg" alt="avatar_io">
-            <span>Sofia</span>
+            <span class="mx-2">Sofia</span>
           </div>
           <div class="my-profile-option">
-            <i class="fa-solid fa-circle-notch"></i>
-            <i class="fa-solid fa-message"></i>
-            <i class="fa-solid fa-ellipsis-vertical"></i>
+            <button type="button"><i class="fa-solid fa-circle-notch"></i></button>
+            <button type="button"><i class="fa-solid fa-message mx-3"></i></button>
+            <button type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>
           </div>
         </div>
 
@@ -62,25 +64,25 @@
         <!-- chat research -->
         <div class="chat-research">
           <div class=" chat-research-input">
-            <i class="fa-solid fa-magnifying-glass mx-4"></i>
-            <input type="text" placeholder="Cerca o inizia una nuova chat">
+            <button type="button"><i class="fa-solid fa-magnifying-glass mx-4"></i></button>
+            <input v-model.trim="searchTerm" type="text" placeholder="Cerca o inizia una nuova chat">
           </div>
         </div>
 
         <!-- chat list -->
         <div class="chat-list">
           <!-- chats -->
-          <div class="chats chat-active">
+          <div v-for="(item, index) in findContact" class="chats" :class="{active: contacts.indexOf(item) === activeChat }" @click="setChat(item.id)" >
             <div class="chats-img">
-              <img src="img/avatar_1.jpg" alt="avatar_1">
+              <img :src="'img/avatar'+ item.avatar +'.jpg'" :alt="'avatar'+ item.avatar">
             </div>
             <div class="chats-info">
-              <span>Michele</span>
-              <span class="chats-info-data">12:00</span>
-              <span>Ultimo messaggio inviato</span>
-            </div>            
+              <span>{{item.name}}</span>
+              <span class="chats-info-data">{{getLastMessage(item).date}}</span>
+              <span>{{getLastMessage(item).message}}</span>
+            </div>
           </div>
-          
+
         </div>
       </div>
 
@@ -90,31 +92,45 @@
         <!-- chat header -->
         <div class="chat-header">
           <div class="chat-header-img">
-            <img src="img/avatar_1.jpg" alt="avatar_1">
+            <img :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
             <div class="chat-header-info">
-              <span>Michele</span>
-              <span>Ultimo accesso oggi alle 12:00</span>
+              <span>{{contacts[activeChat].name}}</span>
+              <span>Ultimo accesso {{getLastMessage(contacts[activeChat]).date}}</span>
             </div>
           </div>
           <div class="chat-header-option">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-solid fa-paperclip"></i>
-            <i class="fa-solid fa-ellipsis-vertical"></i>
+            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button type="button"><i class="fa-solid fa-paperclip mx-3"></i></button>
+            <button type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>
           </div>
         </div>
 
-        <div class="chat-main"></div>
-        <div class="chat-new-message"></div>
+        <!-- chat main -->
+        <div class="chat-main">
+          <div v-for="(item, index) in contacts[activeChat].messages" class="message" :class="item.status">
+            <p>{{item.message}}</p>
+            <span>{{item.hours}}</span>
+          </div>
+          
+          
+        </div>
+
+        <!-- chat new message -->
+        <div class="chat-new-message">
+          <button type="button" class="mx-4"><i class="fa-regular fa-face-smile"></i></button>
+          <input v-model.trim="newMessage" @keyup.enter="sendMessage" type="text">
+          <button type="button" class="mx-4"><i class="fa-solid fa-microphone"></i></button>
+        </div>
       </div>
 
     </div>
 
   </div>
-    
-  
-  
 
- 
+
+
+
+
 
   <!-- mio js -->
   <script src="js/script.js"></script>

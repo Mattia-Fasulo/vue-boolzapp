@@ -5,10 +5,17 @@
   box-sizing: border-box;
 }
 
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 /* ---------general---------- */
 :root {
-  --my-heavenly: #94ccf2 ;
+  --my-heavenly: #94ccf2;
   --my-water-green: #46b09f;
+  --my-sent-green: #ddf7bf;
   --my-gray: #cbccc7;
   --my-light-grey: #e4e3e3;
   --my-dark-grey: #636363;
@@ -23,12 +30,21 @@
 
 body {
   font-family: "Source Code Pro", monospace;
+  letter-spacing: -1px;
   background: rgb(217, 218, 212);
   background: linear-gradient(
     0deg,
     var(--my-gray) 85%,
     var(--my-water-green) 85%
   );
+}
+
+button {
+  color: var(--my-button-grey);
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
 }
 
 /* -------wrapper------ */
@@ -49,7 +65,6 @@ body {
   display: flex;
 }
 
-
 .chat-left {
   width: 35%;
   height: 100%;
@@ -59,7 +74,6 @@ body {
   width: 65%;
   height: 100%;
 }
-
 
 /* -----------------chat left----------------- */
 
@@ -80,7 +94,7 @@ body {
   margin-left: 0.5rem;
 }
 
-.my-profile-img span{
+.my-profile-img span {
   font-size: 0.8rem;
   font-weight: 600;
 }
@@ -88,8 +102,9 @@ body {
 .my-profile-option {
   font-size: 1.2rem;
   margin-right: 1rem;
-  color: var(--my-button-grey);
 }
+
+
 
 /* -------notification------- */
 .notification {
@@ -134,12 +149,12 @@ body {
   background-color: var(--my-dark-white);
 }
 
-.chat-research-input{
+.chat-research-input {
   width: 98%;
   border: 1px solid var(--my-gray);
   background-color: var(--my-white);
 }
-.chat-research-input i {
+.chat-research-input button i {
   color: var(--my-button-grey);
 }
 
@@ -151,7 +166,6 @@ body {
   outline: none;
   background: none;
 }
-
 
 /* ---------chat list-------- */
 .chat-list {
@@ -167,6 +181,10 @@ body {
   display: flex;
   align-items: center;
   border-top: 1px solid var(--my-gray);
+}
+
+.chats:hover {
+  background-color: var(--my-dark-white);
 }
 
 .chats-img img {
@@ -194,17 +212,15 @@ body {
 
 .chats-info-data {
   position: absolute;
-  top: 2px;
-  right: 4px;
+  top: 7px;
+  right: 10px;
   font-size: 0.7rem;
   color: var(--my-dark-grey);
 }
 
-.chat-active {
+.active {
   background-color: var(--my-light-grey);
 }
-
-
 
 /* --------------------chat right------------------- */
 
@@ -218,7 +234,7 @@ body {
   background-color: var(--my-light-grey);
 }
 
-.chat-header-img{
+.chat-header-img {
   display: flex;
 }
 
@@ -247,19 +263,78 @@ body {
 
 .chat-header-option {
   font-size: 1.2rem;
-  margin-right: 1.5rem;
+  margin-right: 2rem;
   color: var(--my-button-grey);
 }
 
+/* ----------chat main-------- */
 .chat-main {
+  padding: 2.5rem 5rem;
   height: calc(100% - 120px);
   width: 100%;
   background-image: url("/img/mine.jpg");
   overflow-y: scroll;
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
 }
 
+.message {
+  position: relative;
+  font-size: 0.8rem;
+  padding: 1rem 2.5rem 1.5rem 1rem;
+  max-width: 300px;
+  border-radius: 0.8rem;
+}
+
+.message p {
+  margin-bottom: 0;
+}
+
+.message span{
+  font-size: 0.7rem;
+  color: var(--my-button-grey);
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+}
+
+.sent {
+  align-self: flex-end;
+  background-color: var(--my-sent-green);
+}
+
+.received {
+  align-self: flex-start;
+  background-color: var(--my-white);
+}
+
+
+/* -------chat new message-------- */
 .chat-new-message {
   height: 60px;
   width: 100%;
   background-color: var(--my-light-grey);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
 }
+.chat-new-message i {
+  color: var(--my-button-grey);
+  font-size: 1.5rem;
+}
+
+.chat-new-message input {
+  padding: 2px 14px;
+  width: 90%;
+  height: 70%;
+  appearance: none;
+  border: none;
+  outline: none;
+  /* background: none; */
+  border-radius: 5px;
+}
+
+
+
