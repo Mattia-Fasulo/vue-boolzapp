@@ -9,6 +9,8 @@ const app = createApp({
             activeChat: 0,
             newMessage: '',
             searchTerm: '',
+            writing: false,
+            online:false,
             randomMessage: [
                 'Va bene', 'Si, ah?', 'No, tu?', 'Ci vediamo sta sera?', 'Bene, tu?', 'Quando ci vediamo?', 'Andiamo al River?', 'Che si fa sta sera?', 'Ok, perfetto', 'Non saprei'
             ],
@@ -225,6 +227,7 @@ const app = createApp({
 
         sendMessage() {
             if (!this.newMessage) return;
+            this.writing = true;
             const d = new Date();
             const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
             let newDate = d.toLocaleDateString('it-IT', options);
@@ -241,6 +244,8 @@ const app = createApp({
             this.contacts[this.activeChat].messages.push(newMsg);
             this.newMessage = '';
             setTimeout(() => {
+                this.writing = false;
+                this.online= true;
                 const d = new Date();
                 const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
                 let newDate = d.toLocaleDateString('it-IT', options);
@@ -255,7 +260,10 @@ const app = createApp({
                     status: 'received'
                 }
                 this.contacts[this.activeChat].messages.push(newMsg);
-            }, 2000)
+            }, 2000),
+            setTimeout(() => {
+                this.online= false;
+            }, 5000)
         },
 
 
@@ -270,7 +278,7 @@ const app = createApp({
 
     },
     mounted() {
-        console.log(this.randomMessage)
+        
     }
 }).mount('#app')
 

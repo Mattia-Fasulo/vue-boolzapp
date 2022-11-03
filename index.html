@@ -95,7 +95,9 @@
             <img :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
             <div class="chat-header-info">
               <span>{{contacts[activeChat].name}}</span>
-              <span>Ultimo accesso il {{getLastMessageReceived(contacts[activeChat]).date}} alle {{getLastMessageReceived(contacts[activeChat]).hours}} </span>
+              <span v-if="!writing && !online">Ultimo accesso il {{getLastMessageReceived(contacts[activeChat]).date}} alle {{getLastMessageReceived(contacts[activeChat]).hours}} </span>
+              <span v-if="writing">Sta scrivendo...</span>
+              <span v-if="online">Online</span>
             </div>
           </div>
           <div class="chat-header-option">
@@ -110,7 +112,7 @@
           <div v-for="(item, index) in contacts[activeChat].messages" class="message" :class="item.status" :key="index" >
             <p>{{item.message}}</p>
             <span>{{item.hours}}</span>
-            <i @click="showCarret" class="fa-solid fa-caret-down"></i>
+            <i class="fa-solid fa-caret-down"></i>
             <!-- <div class="carret-down">
               <button type="button" class="my-1">Message Info</button>
               <button type="button">Delete Message</button>
