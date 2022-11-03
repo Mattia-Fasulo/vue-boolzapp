@@ -318,6 +318,20 @@ button {
   cursor: pointer;
 }
 
+.carret-down {
+  width: 150px;
+  position: absolute;
+  right: 5px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  padding: 10px;
+  background-color: var(--my-white);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  word-break: none;
+}
+
+
 /* -------chat new message-------- */
 .chat-new-message {
   height: 60px;

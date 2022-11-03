@@ -9,6 +9,7 @@ const app = createApp({
             activeChat: 0,
             newMessage: '',
             searchTerm: '',
+            
             contacts: [
                 {
                     id: 1,
@@ -204,10 +205,15 @@ const app = createApp({
         }
     },
     methods: {
-        getLastMessage(item) {
+        getLastMessageReceived(item) {
             const lastMessages = item.messages.filter((message) => {
                 return message.status === 'received'
             })
+            return lastMessages[lastMessages.length - 1];
+        },
+
+        getLastMessage(item) {
+            const lastMessages = item.messages;
             return lastMessages[lastMessages.length - 1];
         },
 
@@ -249,9 +255,7 @@ const app = createApp({
                 this.contacts[this.activeChat].messages.push(newMsg);
             }, 2000)
         },
-        cristo() {
-            console.log('cristo')
-        }
+        
 
     },
     computed: {

@@ -72,7 +72,7 @@
         <!-- chat list -->
         <div class="chat-list">
           <!-- chats -->
-          <div v-for="(item, index) in findContact" class="chats" :class="{active: contacts.indexOf(item) === activeChat }" @click="setChat(item.id)" >
+          <div v-for="(item, index) in findContact" class="chats" :class="{active: contacts.indexOf(item) === activeChat }" @click="setChat(item.id)" :key="item.id">
             <div class="chats-img">
               <img :src="'img/avatar'+ item.avatar +'.jpg'" :alt="'avatar'+ item.avatar">
             </div>
@@ -95,7 +95,7 @@
             <img :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
             <div class="chat-header-info">
               <span>{{contacts[activeChat].name}}</span>
-              <span>Ultimo accesso il {{getLastMessage(contacts[activeChat]).date}} alle {{getLastMessage(contacts[activeChat]).hours}} </span>
+              <span>Ultimo accesso il {{getLastMessageReceived(contacts[activeChat]).date}} alle {{getLastMessageReceived(contacts[activeChat]).hours}} </span>
             </div>
           </div>
           <div class="chat-header-option">
@@ -107,10 +107,14 @@
 
         <!-- chat main -->
         <div class="chat-main">
-          <div v-for="(item, index) in contacts[activeChat].messages" class="message" :class="item.status">
+          <div v-for="(item, index) in contacts[activeChat].messages" class="message" :class="item.status" :key="index" >
             <p>{{item.message}}</p>
             <span>{{item.hours}}</span>
-            <i @click="cristo" class="fa-solid fa-caret-down"></i>
+            <i @click="showCarret" class="fa-solid fa-caret-down"></i>
+            <!-- <div class="carret-down">
+              <button type="button" class="my-1">Message Info</button>
+              <button type="button">Delete Message</button>
+            </div> -->
           </div>
           
           
@@ -120,7 +124,8 @@
         <div class="chat-new-message">
           <button type="button" class="mx-4"><i class="fa-regular fa-face-smile"></i></button>
           <input v-model.trim="newMessage" @keyup.enter="sendMessage" type="text">
-          <button type="button" class="mx-4"><i class="fa-solid fa-microphone"></i></button>
+          <button v-if="!newMessage" type="button" class="mx-4"><i class="fa-solid fa-microphone"></i></button>
+          <button v-else @click="sendMessage" type="button" class="mx-4"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
       </div>
 
