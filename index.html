@@ -95,7 +95,7 @@
             <img :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
             <div class="chat-header-info">
               <span>{{contacts[activeChat].name}}</span>
-              <span>Ultimo accesso {{getLastMessage(contacts[activeChat]).date}}</span>
+              <span>Ultimo accesso il {{getLastMessage(contacts[activeChat]).date}} alle {{getLastMessage(contacts[activeChat]).hours}} </span>
             </div>
           </div>
           <div class="chat-header-option">
@@ -110,6 +110,7 @@
           <div v-for="(item, index) in contacts[activeChat].messages" class="message" :class="item.status">
             <p>{{item.message}}</p>
             <span>{{item.hours}}</span>
+            <i @click="cristo" class="fa-solid fa-caret-down"></i>
           </div>
           
           
