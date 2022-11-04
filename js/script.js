@@ -10,7 +10,12 @@ const app = createApp({
             newMessage: '',
             searchTerm: '',
             writing: false,
-            online:false,
+            online: false,
+            chatDropdown: false,
+            messageOption: {
+                index: null,
+                show: false
+            },
             randomMessage: [
                 'Va bene', 'Si, ah?', 'No, tu?', 'Ci vediamo sta sera?', 'Bene, tu?', 'Quando ci vediamo?', 'Andiamo al River?', 'Che si fa sta sera?', 'Ok, perfetto', 'Non saprei'
             ],
@@ -179,46 +184,22 @@ const app = createApp({
                         }
                     ],
                 },
-                {
-                    id: 8,
-                    name: 'Davide',
-                    avatar: '_8',
-                    visible: true,
-                    messages: [
-                        {
-                            date: '10/01/2020 ',
-                            hours: '15:30',
-                            message: 'Ciao, andiamo a mangiare la pizza stasera?',
-                            status: 'received'
-                        },
-                        {
-                            date: '10/01/2020 ',
-                            hours: '15:50',
-                            message: 'No, l\'ho già mangiata ieri, ordiniamo sushi!',
-                            status: 'sent'
-                        },
-                        {
-                            date: '10/01/2020 ',
-                            hours: '15:51',
-                            message: 'OK!!',
-                            status: 'received'
-                        }
-                    ],
-                }
             ]
         }
     },
     methods: {
-        getLastMessageReceived(item) {
-            const lastMessages = item.messages.filter((message) => {
-                return message.status === 'received'
-            })
-            return lastMessages[lastMessages.length - 1];
+        consol(obj){
+            console.log(obj.messages.length)
         },
 
         getLastMessage(item) {
-            const lastMessages = item.messages;
-            return lastMessages[lastMessages.length - 1];
+            if (item.messages.length < 1) { 
+                return 
+            }
+            else {
+                const lastMessages = item.messages;
+                return lastMessages[lastMessages.length - 1];
+            }
         },
 
         setChat(id) {
@@ -243,9 +224,18 @@ const app = createApp({
             }
             this.contacts[this.activeChat].messages.push(newMsg);
             this.newMessage = '';
+
+            //refs
+            //fa questa azione dopo che ha renderizzato la pagina
+            //con questo scrollo anche con il messaggio
+            this.$nextTick(() => {
+                // console.log(this.$refs.msg[this.$refs.msg.length - 1])
+                const el = this.$refs.msg[this.$refs.msg.length - 1];
+                el.scrollIntoView();
+            })
             setTimeout(() => {
                 this.writing = false;
-                this.online= true;
+                this.online = true;
                 const d = new Date();
                 const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
                 let newDate = d.toLocaleDateString('it-IT', options);
@@ -256,16 +246,37 @@ const app = createApp({
                 const newMsg = {
                     date: newDate,
                     hours: hours + ':' + minutes,
-                    message: this.randomMessage[randomNumber(0,9)],
+                    message: this.randomMessage[randomNumber(0, 9)],
                     status: 'received'
                 }
                 this.contacts[this.activeChat].messages.push(newMsg);
-            }, 2000),
-            setTimeout(() => {
-                this.online= false;
-            }, 5000)
-        },
 
+                //qui scrolla al messaggio ricevuto
+                this.$nextTick(() => {
+                    const el = this.$refs.msg[this.$refs.msg.length - 1];
+                    el.scrollIntoView();
+                })
+
+
+            }, 3000),
+                setTimeout(() => {
+                    this.online = false;
+                }, 6000)
+        },
+        showMessageOption(i) {
+            this.messageOption.index = i;
+            this.messageOption.show = !this.messageOption.show;
+        },
+        deleteMessage(i) {
+            this.contacts[this.activeChat].messages.splice(i, 1);
+            this.messageOption.show = !this.messageOption.show;
+        },
+        showChatOption() {
+            this.chatDropdown = !this.chatDropdown;
+        },
+        deleteAllMessage() {
+            this.contacts[this.activeChat].messages = [];
+        }
 
     },
     computed: {
@@ -278,7 +289,7 @@ const app = createApp({
 
     },
     mounted() {
-        
+
     }
 }).mount('#app')
 

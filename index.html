@@ -40,8 +40,8 @@
         <!-- my profile -->
         <div class="my-profile">
           <div class="my-profile-img">
-            <img src="img/avatar_io.jpg" alt="avatar_io">
-            <span class="mx-2">Sofia</span>
+            <img src="img/avatar_8.jpg" alt="avatar_io">
+            <span class="mx-2">Mattia</span>
           </div>
           <div class="my-profile-option">
             <button type="button"><i class="fa-solid fa-circle-notch"></i></button>
@@ -72,14 +72,15 @@
         <!-- chat list -->
         <div class="chat-list">
           <!-- chats -->
-          <div v-for="(item, index) in findContact" class="chats" :class="{active: contacts.indexOf(item) === activeChat }" @click="setChat(item.id)" :key="item.id">
+          <div v-for="(item, index) in findContact" class="chats"
+            :class="{active: contacts.indexOf(item) === activeChat }" @click="setChat(item.id)" :key="item.id">
             <div class="chats-img">
               <img :src="'img/avatar'+ item.avatar +'.jpg'" :alt="'avatar'+ item.avatar">
             </div>
             <div class="chats-info">
-              <span>{{item.name}}</span>
-              <span class="chats-info-data">{{getLastMessage(item).date}}</span>
-              <span>{{getLastMessage(item).message}}</span>
+              <span class="chat-name">{{item.name}}</span>
+              <span v-if="item.messages.length > 0" class="chats-info-data">{{getLastMessage(item).date}}</span>
+              <span v-if="item.messages.length > 0">{{getLastMessage(item).message}}</span>
             </div>
           </div>
 
@@ -91,35 +92,57 @@
 
         <!-- chat header -->
         <div class="chat-header">
+          <!-- img profile active chat -->
           <div class="chat-header-img">
             <img :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
+            <!-- info chat active -->
             <div class="chat-header-info">
-              <span>{{contacts[activeChat].name}}</span>
-              <span v-if="!writing && !online">Ultimo accesso il {{getLastMessageReceived(contacts[activeChat]).date}} alle {{getLastMessageReceived(contacts[activeChat]).hours}} </span>
+              <span class="chat-name">{{contacts[activeChat].name}}</span>
+              <!-- state chat active -->
+              <div  v-if="(contacts[activeChat].messages.length > 0)">
+                <span v-if="!writing && !online">Ultimo accesso il {{contacts[activeChat].messages.length > 0 ? getLastMessage(contacts[activeChat]).date : ''}}
+                  alle {{contacts[activeChat].messages.length > 0 ? getLastMessage(contacts[activeChat]).hours : ''}} </span>
+              </div >
               <span v-if="writing">Sta scrivendo...</span>
               <span v-if="online">Online</span>
             </div>
           </div>
+
+          <!-- chat header option -->
           <div class="chat-header-option">
             <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
             <button type="button"><i class="fa-solid fa-paperclip mx-3"></i></button>
-            <button type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            <button @click="showChatOption" type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+
+            <!-- chat header dropdown -->
+            <div v-if="chatDropdown" class="chat-dropdown">
+              <button @click="deleteAllMessage" class="my-1" type="button">Delete all messages</button>
+
+              <button class="my-1" type="button">Delete chat</button>
+            </div>
           </div>
         </div>
 
         <!-- chat main -->
         <div class="chat-main">
-          <div v-for="(item, index) in contacts[activeChat].messages" class="message" :class="item.status" :key="index" >
-            <p>{{item.message}}</p>
+
+          <!-- message -->
+          <div v-for="(item, index) in contacts[activeChat].messages" class="message" :class="item.status" :key="index"
+            ref="msg">
+
+            <!-- questo mi permette di usare l'html -->
+            <p v-html="item.message"></p>
             <span>{{item.hours}}</span>
-            <i class="fa-solid fa-caret-down"></i>
-            <!-- <div class="carret-down">
+            <i @click="showMessageOption(index)" class="fa-solid fa-angle-down"></i>
+
+            <!-- message dropdwon -->
+            <div v-if="messageOption.index === index && messageOption.show" class="carret-down">
               <button type="button" class="my-1">Message Info</button>
-              <button type="button">Delete Message</button>
-            </div> -->
+              <button @click="deleteMessage(index)" type="button" class="my-1">Delete Message</button>
+            </div>
           </div>
-          
-          
+
+
         </div>
 
         <!-- chat new message -->
@@ -127,7 +150,8 @@
           <button type="button" class="mx-4"><i class="fa-regular fa-face-smile"></i></button>
           <input v-model.trim="newMessage" @keyup.enter="sendMessage" type="text">
           <button v-if="!newMessage" type="button" class="mx-4"><i class="fa-solid fa-microphone"></i></button>
-          <button v-else @click="sendMessage" type="button" class="mx-4"><i class="fa-solid fa-paper-plane"></i></button>
+          <button v-else @click="sendMessage" type="button" class="mx-4"><i
+              class="fa-solid fa-paper-plane"></i></button>
         </div>
       </div>
 
