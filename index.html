@@ -41,7 +41,7 @@
         <div class="my-profile">
           <div class="my-profile-img">
             <img src="img/avatar_8.jpg" alt="avatar_io">
-            <span class="mx-2">Mattia</span>
+            <span class="chat-name mx-2">Mattia</span>
           </div>
           <div class="my-profile-option">
             <button type="button"><i class="fa-solid fa-circle-notch"></i></button>
@@ -117,8 +117,7 @@
             <!-- chat header dropdown -->
             <div v-if="chatDropdown" class="chat-dropdown">
               <button @click="deleteAllMessage" class="my-1" type="button">Delete all messages</button>
-
-              <button class="my-1" type="button">Delete chat</button>
+              <button @click="deleteChat" class="my-1" type="button">Delete chat</button>
             </div>
           </div>
         </div>

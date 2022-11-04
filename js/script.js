@@ -193,13 +193,10 @@ const app = createApp({
         },
 
         getLastMessage(item) {
-            if (item.messages.length < 1) { 
-                return 
-            }
-            else {
+            
                 const lastMessages = item.messages;
                 return lastMessages[lastMessages.length - 1];
-            }
+            
         },
 
         setChat(id) {
@@ -276,6 +273,10 @@ const app = createApp({
         },
         deleteAllMessage() {
             this.contacts[this.activeChat].messages = [];
+        },
+        deleteChat(){
+            this.contacts.splice(this.activeChat, 1);
+            this.chatDropdown = false
         }
 
     },
