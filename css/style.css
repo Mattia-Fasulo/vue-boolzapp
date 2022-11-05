@@ -372,7 +372,8 @@ button {
   padding: 1rem 2.5rem 1.5rem 1rem;
   max-width: 300px;
   border-radius: 0.8rem;
-  word-break: keep-all;
+  word-break: break-all;
+  
 }
 
 .message p {
@@ -409,7 +410,7 @@ button {
   width: max-content;
   z-index: 120;
   position: absolute;
-  right: -20px;
+  right: -40px;
   display: flex;
   flex-flow: column;
   align-items: flex-start;

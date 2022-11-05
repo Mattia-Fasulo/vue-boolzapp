@@ -30,9 +30,9 @@
 <body>
 
 
-  <div id="app" class="wrapper" >
+  <div id="app" class="wrapper">
     <!-- all chat -->
-    <div class="all-chat text-big" :class={darkmode} >
+    <div class="all-chat text-big" :class={darkmode}>
 
       <!-- chat left -->
       <div class="chat-left">
@@ -57,7 +57,7 @@
         </div>
 
         <!-- notification -->
-        <div class="notification" >
+        <div class="notification">
           <div class="notification-no">
             <i class="fa-solid fa-bell-slash"></i>
           </div>
@@ -70,17 +70,18 @@
         <!-- chat research -->
         <div class="chat-research">
           <div class=" chat-research-input position-relative">
-            
+
             <button @click="focusSearch" type="button"><i class="fa-solid fa-magnifying-glass mx-2"></i></button>
-            <input ref="inputSearch" v-model.trim="searchTerm" type="text" class="mx-1" placeholder="Cerca o inizia una nuova chat">
-            <button id="btn-new-chat" @click="showAddNewChat" type="button"><i class="fa-solid fa-user-plus mx-1"></i></button>
-            
+            <input ref="inputSearch" v-model.trim="searchTerm" type="text" class="mx-1"
+              placeholder="Cerca o inizia una nuova chat">
+            <button id="btn-new-chat" @click="showAddNewChat" type="button"><i
+                class="fa-solid fa-user-plus mx-1"></i></button>
+
             <!-- popup new chat -->
             <div v-if="newchat" class="popup-new-chat">
               <span>Aggiungi una nuova chat</span>
               <input id="input-search" type="text" placeholder="Inserisci un nome" v-model.trim="newName">
-              <input type="text" placeholder="inserisci un url"
-              v-model.trim="newAvatar">
+              <input type="text" placeholder="inserisci un url" v-model.trim="newAvatar">
               <button @click="addNewChat" type="button">Aggiungi</button>
             </div>
           </div>
@@ -92,7 +93,8 @@
           <div v-for="(item, index) in findContact" class="chats"
             :class="{active: contacts.indexOf(item) === activeChat }" @click="setChat(item.id)" :key="item.id">
             <div class="chats-img">
-              <img :class={darkmode} v-if="!(item.avatar.length > 2)" :src="'img/avatar'+ item.avatar +'.jpg'" :alt="'avatar'+ item.avatar">
+              <img :class={darkmode} v-if="!(item.avatar.length > 2)" :src="'img/avatar'+ item.avatar +'.jpg'"
+                :alt="'avatar'+ item.avatar">
               <img :class={darkmode} v-else :src="item.avatar" :alt="'avatar'">
             </div>
             <div class="chats-info">
@@ -112,18 +114,24 @@
         <div class="chat-header">
           <!-- img profile active chat -->
           <div class="chat-header-img">
-            <img :class={darkmode} v-if="!(contacts[activeChat].avatar.length > 2)" :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
-            <img :class={darkmode} v-else :src="contacts[activeChat].avatar" :alt="'avatar'+ contacts[activeChat].avatar">
+            <img :class={darkmode} v-if="!(contacts[activeChat].avatar.length > 2)"
+              :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
+            <img :class={darkmode} v-else :src="contacts[activeChat].avatar"
+              :alt="'avatar'+ contacts[activeChat].avatar">
             <!-- info chat active -->
             <div class="chat-header-info">
               <span class="chat-name">{{contacts[activeChat].name}}</span>
               <!-- state chat active -->
-              <div id="ultimo-messaggio"  v-if="(contacts[activeChat].messages.length > 0)">
-                <span v-if="!writing && !online">Ultimo accesso il {{contacts[activeChat].messages.length > 0 ? getLastMessage(contacts[activeChat]).date : ''}}
-                  alle {{contacts[activeChat].messages.length > 0 ? getLastMessage(contacts[activeChat]).hours : ''}} </span>
-              </div >
-              <span v-if="writing">Sta scrivendo...</span>
-              <span v-if="online">Online</span>
+              <div id="ultimo-messaggio" v-if="(contacts[activeChat].messages.length > 0)">
+                <span v-if="!writing && !online">Ultimo accesso il {{contacts[activeChat].messages.length > 0 ?
+                  getLastMessage(contacts[activeChat]).date : ''}}
+                  alle {{contacts[activeChat].messages.length > 0 ? getLastMessage(contacts[activeChat]).hours : ''}}
+                </span>
+                <span v-if="writing">Sta scrivendo...</span>
+              
+                <span v-if="online">Online</span>
+              </div>
+              
             </div>
           </div>
 

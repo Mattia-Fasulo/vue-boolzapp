@@ -70,7 +70,15 @@ const app = createApp({
                 '&#9749;'
             ],
             randomMessage: [
-                'Va bene', 'Si, ah?', 'No, tu?', 'Ci vediamo sta sera?', 'Bene, tu?', 'Quando ci vediamo?', 'Andiamo al River?', 'Che si fa sta sera?', 'Ok, perfetto', 'Non saprei'
+                '&#128512;',
+                '&#128513;',
+                '&#128514;',
+                '&#128515;',
+                '&#128516;',
+                '&#128517;',
+                '&#128518;',
+                '&#128519;',
+                '&#128521;', 'Va bene', 'Si, ah?', 'No, tu?', 'Ci vediamo sta sera?', 'Bene, tu?', 'Quando ci vediamo?', 'Andiamo al River?', 'Che si fa sta sera?', 'Ok, perfetto', 'Non saprei'
             ],
             contacts: [
                 {
@@ -296,7 +304,7 @@ const app = createApp({
                 const newMsg = {
                     date: newDate,
                     hours: hours + ':' + minutes,
-                    message: this.randomMessage[randomNumber(0, 9)],
+                    message: this.randomMessage[randomNumber(0, 18)],
                     status: 'received'
                 }
                 this.contacts[this.activeChat].messages.push(newMsg);
@@ -361,17 +369,17 @@ const app = createApp({
         showAddNewChat() {
             this.newchat = !this.newchat;
         },
-        focusSearch(){
+        focusSearch() {
             this.$refs.inputSearch.focus();
         },
-        showMyProfileDropdown(){
+        showMyProfileDropdown() {
             this.showmyprofiledropdown = !this.showmyprofiledropdown;
         },
-        darkmodeOn(){
+        darkmodeOn() {
             this.darkmode = !this.darkmode;
             this.showmyprofiledropdown = false;
         },
-        textBigOn(){
+        textBigOn() {
             this.textbig = !this.textbig;
             this.showmyprofiledropdown = false;
         }
