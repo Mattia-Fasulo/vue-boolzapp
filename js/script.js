@@ -334,6 +334,7 @@ const app = createApp({
         addEmoticon(i) {
             this.newMessage += ' ' + this.icons[i];
             this.showemoticon = !this.showemoticon;
+            this.$refs.inputNewMessage.focus();
         },
         addNewChat() {
             if (!this.newName | !this.newAvatar) return;
@@ -345,7 +346,7 @@ const app = createApp({
                 messages: [],
             };
             obj.id = this.contacts.length + 1;
-            obj.name = this.newName;
+            obj.name = capitalizeFirstLetter(this.newName);
             obj.avatar = this.newAvatar;
             this.contacts.unshift(obj);
             this.newName = '';
@@ -356,6 +357,9 @@ const app = createApp({
         },
         showAddNewChat() {
             this.newchat = !this.newchat;
+        },
+        focusSearch(){
+            this.$refs.inputSearch.focus();
         }
 
     },

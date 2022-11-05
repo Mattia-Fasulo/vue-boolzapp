@@ -307,12 +307,13 @@ button {
 
 .chat-dropdown {
   padding: 10px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   z-index: 100;
   position: absolute;
   right: -10px;
   width: max-content;
   background-color: var(--my-white);
+  border: 1px solid var(--my-gray);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   display: flex;
   flex-flow: column;

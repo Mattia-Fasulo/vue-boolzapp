@@ -65,14 +65,14 @@
         <div class="chat-research">
           <div class=" chat-research-input">
             
-            <button type="button"><i class="fa-solid fa-magnifying-glass mx-3"></i></button>
-            <input v-model.trim="searchTerm" type="text" class="mx-1" placeholder="Cerca o inizia una nuova chat">
+            <button @click="focusSearch" type="button"><i class="fa-solid fa-magnifying-glass mx-3"></i></button>
+            <input ref="inputSearch" v-model.trim="searchTerm" type="text" class="mx-1" placeholder="Cerca o inizia una nuova chat">
             <button @click="showAddNewChat" type="button"><i class="fa-solid fa-user-plus mx-2"></i></button>
             
             <!-- popup new chat -->
             <div v-if="newchat" class="popup-new-chat">
               <span>Aggiungi una nuova chat</span>
-              <input type="text" placeholder="Inserisci un nome" v-model.trim="newName">
+              <input id="input-search" type="text" placeholder="Inserisci un nome" v-model.trim="newName">
               <input type="text" placeholder="inserisci un url"
               v-model.trim="newAvatar">
               <button @click="addNewChat" type="button">Aggiungi</button>
@@ -129,8 +129,8 @@
 
             <!-- chat header dropdown -->
             <div v-if="chatDropdown" class="chat-dropdown">
-              <button @click="deleteAllMessage" class="my-1" type="button">Delete all messages</button>
-              <button @click="deleteChat" class="my-1" type="button">Delete chat</button>
+              <button @click="deleteAllMessage" class="my-1" type="button">Cancella i messaggi</button>
+              <button @click="deleteChat" class="my-1" type="button">Cancella la chat</button>
             </div>
           </div>
         </div>
@@ -149,8 +149,8 @@
 
             <!-- message dropdwon -->
             <div v-if="messageOption.index === index && messageOption.show" class="carret-down">
-              <button type="button" class="my-1">Message Info</button>
-              <button @click="deleteMessage(index)" type="button" class="my-1">Delete Message</button>
+              <button type="button" class="my-1">Info messaggio</button>
+              <button @click="deleteMessage(index)" type="button" class="my-1">Cancella il messaggio</button>
             </div>
           </div>
 
@@ -168,7 +168,7 @@
             </div>
 
           </div>
-          <input v-model.trim="newMessage" @keyup.enter="sendMessage" type="text">
+          <input ref="inputNewMessage" v-model.trim="newMessage" @keyup.enter="sendMessage" type="text">
           <button v-if="!newMessage" type="button" class="mx-4"><i class="fa-solid fa-microphone"></i></button>
           <button v-else @click="sendMessage" type="button" class="mx-4"><i
               class="fa-solid fa-paper-plane"></i></button>
