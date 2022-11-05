@@ -118,6 +118,7 @@ button {
   background-color: var(--my-white);
   background-color: var(--my-light-grey);
   border-right: 1px solid var(--my-button-grey);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .my-profile-dropdown button {
@@ -340,7 +341,8 @@ button {
   font-size: 0.9rem;
   z-index: 100;
   position: absolute;
-  right: -10px;
+  top: 45px;
+  right: -15px;
   width: max-content;
   background-color: var(--my-white);
   border: 1px solid var(--my-gray);
