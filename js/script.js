@@ -16,6 +16,9 @@ const app = createApp({
             newchat: false,
             chatDropdown: false,
             showemoticon: false,
+            darkmode: false,
+            textbig: false,
+            showmyprofiledropdown: false,
             messageOption: {
                 index: null,
                 show: false
@@ -360,8 +363,18 @@ const app = createApp({
         },
         focusSearch(){
             this.$refs.inputSearch.focus();
+        },
+        showMyProfileDropdown(){
+            this.showmyprofiledropdown = !this.showmyprofiledropdown;
+        },
+        darkmodeOn(){
+            this.darkmode = !this.darkmode;
+            this.showmyprofiledropdown = false;
+        },
+        textBigOn(){
+            this.textbig = !this.textbig;
+            this.showmyprofiledropdown = false;
         }
-
     },
     computed: {
         findContact() {

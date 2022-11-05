@@ -104,8 +104,26 @@ button {
   margin-right: 1rem;
 }
 
+.my-profile-dropdown {
+  z-index: 300;
+  font-size: 0.9rem;
+  width: max-content;
+  position: absolute;
+  top: 45px;
+  right: -17px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  padding: 5px 10px;
+  background-color: var(--my-white);
+  background-color: var(--my-light-grey);
+  border-right: 1px solid var(--my-button-grey);
+}
 
+.my-profile-dropdown button {
+  color: black;
 
+}
 /* -------notification------- */
 .notification {
   height: 70px;
@@ -160,12 +178,18 @@ button {
 }
 
 .chat-research input {
+  overflow: hidden;
   font-size: 0.8rem;
-  width: 75%;
+  width: 70%;
   appearance: none;
   border: none;
   outline: none;
   background: none;
+}
+
+#btn-new-chat {
+  position: absolute;
+  right: 10px;
 }
 
 .popup-new-chat {
@@ -288,8 +312,14 @@ button {
 }
 
 .chat-header-info span {
+  
   font-size: 0.7rem;
   color: var(--my-dark-grey);
+}
+
+#ultimo-messaggio {
+  margin-top: -5px;
+  margin-bottom: -5px;
 }
 
 .chat-name{
@@ -440,6 +470,15 @@ button {
   /* background: none; */
   border-radius: 5px;
 }
+
+.darkmode {
+  filter: invert(1);
+}
+
+.textbig {
+  font-size: 1.3rem;
+}
+
 
 
 

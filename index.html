@@ -30,9 +30,9 @@
 <body>
 
 
-  <div id="app" class="wrapper">
+  <div id="app" class="wrapper" >
     <!-- all chat -->
-    <div class="all-chat">
+    <div class="all-chat text-big" :class={darkmode} >
 
       <!-- chat left -->
       <div class="chat-left">
@@ -40,18 +40,24 @@
         <!-- my profile -->
         <div class="my-profile">
           <div class="my-profile-img">
-            <img src="img/avatar_8.jpg" alt="avatar_io">
+            <img :class={darkmode} src="img/avatar_8.jpg" alt="avatar_io">
             <span class="chat-name mx-2">Mattia</span>
           </div>
-          <div class="my-profile-option">
+          <div class="my-profile-option position-relative">
             <button type="button"><i class="fa-solid fa-circle-notch"></i></button>
             <button type="button"><i class="fa-solid fa-message mx-3"></i></button>
-            <button type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            <button @click="showMyProfileDropdown" type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+
+            <!-- my profile dropdown -->
+            <div v-if="showmyprofiledropdown" class="my-profile-dropdown">
+              <button @click="darkmodeOn" type="button" class="my-1">Modalità Dark</button>
+              <button @click="textBigOn" type="button" class="my-1">Dimensioni testo</button>
+            </div>
           </div>
         </div>
 
         <!-- notification -->
-        <div class="notification">
+        <div class="notification" >
           <div class="notification-no">
             <i class="fa-solid fa-bell-slash"></i>
           </div>
@@ -63,11 +69,11 @@
 
         <!-- chat research -->
         <div class="chat-research">
-          <div class=" chat-research-input">
+          <div class=" chat-research-input position-relative">
             
-            <button @click="focusSearch" type="button"><i class="fa-solid fa-magnifying-glass mx-3"></i></button>
+            <button @click="focusSearch" type="button"><i class="fa-solid fa-magnifying-glass mx-2"></i></button>
             <input ref="inputSearch" v-model.trim="searchTerm" type="text" class="mx-1" placeholder="Cerca o inizia una nuova chat">
-            <button @click="showAddNewChat" type="button"><i class="fa-solid fa-user-plus mx-2"></i></button>
+            <button id="btn-new-chat" @click="showAddNewChat" type="button"><i class="fa-solid fa-user-plus mx-1"></i></button>
             
             <!-- popup new chat -->
             <div v-if="newchat" class="popup-new-chat">
@@ -86,8 +92,8 @@
           <div v-for="(item, index) in findContact" class="chats"
             :class="{active: contacts.indexOf(item) === activeChat }" @click="setChat(item.id)" :key="item.id">
             <div class="chats-img">
-              <img v-if="!(item.avatar.length > 2)" :src="'img/avatar'+ item.avatar +'.jpg'" :alt="'avatar'+ item.avatar">
-              <img v-else :src="item.avatar" :alt="'avatar'">
+              <img :class={darkmode} v-if="!(item.avatar.length > 2)" :src="'img/avatar'+ item.avatar +'.jpg'" :alt="'avatar'+ item.avatar">
+              <img :class={darkmode} v-else :src="item.avatar" :alt="'avatar'">
             </div>
             <div class="chats-info">
               <span class="chat-name">{{item.name}}</span>
@@ -106,13 +112,13 @@
         <div class="chat-header">
           <!-- img profile active chat -->
           <div class="chat-header-img">
-            <img v-if="!(contacts[activeChat].avatar.length > 2)" :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
-            <img v-else :src="contacts[activeChat].avatar" :alt="'avatar'+ contacts[activeChat].avatar">
+            <img :class={darkmode} v-if="!(contacts[activeChat].avatar.length > 2)" :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
+            <img :class={darkmode} v-else :src="contacts[activeChat].avatar" :alt="'avatar'+ contacts[activeChat].avatar">
             <!-- info chat active -->
             <div class="chat-header-info">
               <span class="chat-name">{{contacts[activeChat].name}}</span>
               <!-- state chat active -->
-              <div  v-if="(contacts[activeChat].messages.length > 0)">
+              <div id="ultimo-messaggio"  v-if="(contacts[activeChat].messages.length > 0)">
                 <span v-if="!writing && !online">Ultimo accesso il {{contacts[activeChat].messages.length > 0 ? getLastMessage(contacts[activeChat]).date : ''}}
                   alle {{contacts[activeChat].messages.length > 0 ? getLastMessage(contacts[activeChat]).hours : ''}} </span>
               </div >
@@ -143,7 +149,7 @@
             ref="msg">
 
             <!-- questo mi permette di usare l'html -->
-            <p v-html="item.message"></p>
+            <p :class={textbig} v-html="item.message"></p>
             <span>{{item.hours}}</span>
             <i @click="showMessageOption(index)" class="fa-solid fa-angle-down"></i>
 
