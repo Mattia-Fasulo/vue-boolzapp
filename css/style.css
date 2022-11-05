@@ -150,6 +150,7 @@ button {
 }
 
 .chat-research-input {
+  position: relative;
   width: 98%;
   border: 1px solid var(--my-gray);
   background-color: var(--my-white);
@@ -160,12 +161,48 @@ button {
 
 .chat-research input {
   font-size: 0.8rem;
-  width: 70%;
+  width: 75%;
   appearance: none;
   border: none;
   outline: none;
   background: none;
 }
+
+.popup-new-chat {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 10px;
+  position: absolute;
+  z-index: 200;
+  left: 150px;
+  top: 30px;
+  width: 270px;
+  height: max-content;
+  background-color: var(--my-dark-white);
+  border: 1px solid var(--my-gray);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.popup-new-chat input {
+  text-align: center;
+  padding-left: 5px;
+  width: 98%;
+  margin: 10px 0;
+  background-color: var(--my-white);
+  border: 1px solid var(--my-gray);
+}
+
+.popup-new-chat button {
+  margin: 7px 0;
+  width: 50%;
+  border: 1px solid var(--my-gray);
+  align-self: center;
+  background-color: var(--my-white);
+  color: black;
+}
+
+
 
 /* ---------chat list-------- */
 .chat-list {
@@ -197,7 +234,6 @@ button {
   display: flex;
   flex-flow: column;
   margin-left: 1rem;
-  margin-top: -1rem;
 }
 
 .chats-info span:first-child {
@@ -367,6 +403,24 @@ button {
   justify-content: space-between;
   
 }
+
+.container-emoticon {
+  font-size: 1.2rem;
+  padding: 5px;
+  z-index: 150;
+  position: absolute;
+  bottom: 45px;
+  left: 2px;
+  width: 250px;
+  height: 150px;
+  background-color: var(--my-light-grey);
+  overflow-y: auto;
+}
+
+.container-emoticon span {
+  cursor: pointer;
+}
+
 .chat-new-message i {
   color: var(--my-button-grey);
   font-size: 1.5rem;

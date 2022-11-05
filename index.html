@@ -64,8 +64,19 @@
         <!-- chat research -->
         <div class="chat-research">
           <div class=" chat-research-input">
-            <button type="button"><i class="fa-solid fa-magnifying-glass mx-4"></i></button>
-            <input v-model.trim="searchTerm" type="text" placeholder="Cerca o inizia una nuova chat">
+            
+            <button type="button"><i class="fa-solid fa-magnifying-glass mx-3"></i></button>
+            <input v-model.trim="searchTerm" type="text" class="mx-1" placeholder="Cerca o inizia una nuova chat">
+            <button @click="showAddNewChat" type="button"><i class="fa-solid fa-user-plus mx-2"></i></button>
+            
+            <!-- popup new chat -->
+            <div v-if="newchat" class="popup-new-chat">
+              <span>Aggiungi una nuova chat</span>
+              <input type="text" placeholder="Inserisci un nome" v-model.trim="newName">
+              <input type="text" placeholder="inserisci un url"
+              v-model.trim="newAvatar">
+              <button @click="addNewChat" type="button">Aggiungi</button>
+            </div>
           </div>
         </div>
 
@@ -75,7 +86,8 @@
           <div v-for="(item, index) in findContact" class="chats"
             :class="{active: contacts.indexOf(item) === activeChat }" @click="setChat(item.id)" :key="item.id">
             <div class="chats-img">
-              <img :src="'img/avatar'+ item.avatar +'.jpg'" :alt="'avatar'+ item.avatar">
+              <img v-if="!(item.avatar.length > 2)" :src="'img/avatar'+ item.avatar +'.jpg'" :alt="'avatar'+ item.avatar">
+              <img v-else :src="item.avatar" :alt="'avatar'">
             </div>
             <div class="chats-info">
               <span class="chat-name">{{item.name}}</span>
@@ -94,7 +106,8 @@
         <div class="chat-header">
           <!-- img profile active chat -->
           <div class="chat-header-img">
-            <img :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
+            <img v-if="!(contacts[activeChat].avatar.length > 2)" :src="'img/avatar'+ contacts[activeChat].avatar +'.jpg'" :alt="'avatar'+ contacts[activeChat].avatar">
+            <img v-else :src="contacts[activeChat].avatar" :alt="'avatar'+ contacts[activeChat].avatar">
             <!-- info chat active -->
             <div class="chat-header-info">
               <span class="chat-name">{{contacts[activeChat].name}}</span>
@@ -144,9 +157,17 @@
 
         </div>
 
-        <!-- chat new message -->
+        <!-- new message -->
         <div class="chat-new-message">
-          <button type="button" class="mx-4"><i class="fa-regular fa-face-smile"></i></button>
+          <div class="position-relative">
+            <button @click="showEmoticon" type="button" class="mx-4"><i class="fa-regular fa-face-smile"></i></button>
+
+            <!-- container emoticon -->
+            <div v-if="showemoticon" class="container-emoticon">
+              <span v-for="(icon, index) in icons" :key="index" v-html="icon" @click="addEmoticon(index)"></span>
+            </div>
+
+          </div>
           <input v-model.trim="newMessage" @keyup.enter="sendMessage" type="text">
           <button v-if="!newMessage" type="button" class="mx-4"><i class="fa-solid fa-microphone"></i></button>
           <button v-else @click="sendMessage" type="button" class="mx-4"><i

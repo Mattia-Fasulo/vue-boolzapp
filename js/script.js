@@ -9,13 +9,63 @@ const app = createApp({
             activeChat: 0,
             newMessage: '',
             searchTerm: '',
+            newName: '',
+            newAvatar: '',
             writing: false,
             online: false,
+            newchat: false,
             chatDropdown: false,
+            showemoticon: false,
             messageOption: {
                 index: null,
                 show: false
             },
+            icons: [
+                '&#128512;',
+                '&#128513;',
+                '&#128514;',
+                '&#128515;',
+                '&#128516;',
+                '&#128517;',
+                '&#128518;',
+                '&#128519;',
+                '&#128521;',
+                '&#128522;',
+                '&#128523;',
+                '&#128524;',
+                '&#128525;',
+                '&#128526;',
+                '&#128528;',
+                '&#128529;',
+                '&#128530;',
+                '&#128536;',
+                '&#128545;',
+                '&#128548;',
+                '&#128561;',
+                '&#129315;',
+                '&#129299;',
+                '&#129319;',
+                '&#129321;',
+                '&#129325;',
+                '&#129488;',
+                '&#9996;',
+                '&#9995;',
+                '&#10024;',
+                '&#10062;',
+                '&#128064;',
+                '&#128077;',
+                '&#128079;',
+                '&#128152;',
+                '&#128149;',
+                '&#128156;',
+                '&#128158;',
+                '&#128584;',
+                '&#129310;',
+                '&#129505;',
+                '&#127802;',
+                '&#127801;',
+                '&#9749;'
+            ],
             randomMessage: [
                 'Va bene', 'Si, ah?', 'No, tu?', 'Ci vediamo sta sera?', 'Bene, tu?', 'Quando ci vediamo?', 'Andiamo al River?', 'Che si fa sta sera?', 'Ok, perfetto', 'Non saprei'
             ],
@@ -188,15 +238,15 @@ const app = createApp({
         }
     },
     methods: {
-        consol(obj){
-            console.log(obj.messages.length)
+        consol(obj) {
+            console.log(obj.avatar.length)
         },
 
         getLastMessage(item) {
-            
-                const lastMessages = item.messages;
-                return lastMessages[lastMessages.length - 1];
-            
+
+            const lastMessages = item.messages;
+            return lastMessages[lastMessages.length - 1];
+
         },
 
         setChat(id) {
@@ -274,9 +324,38 @@ const app = createApp({
         deleteAllMessage() {
             this.contacts[this.activeChat].messages = [];
         },
-        deleteChat(){
+        deleteChat() {
             this.contacts.splice(this.activeChat, 1);
             this.chatDropdown = false
+        },
+        showEmoticon() {
+            this.showemoticon = !this.showemoticon;
+        },
+        addEmoticon(i) {
+            this.newMessage += ' ' + this.icons[i];
+            this.showemoticon = !this.showemoticon;
+        },
+        addNewChat() {
+            if (!this.newName | !this.newAvatar) return;
+            const obj = {
+                id: '',
+                name: '',
+                avatar: '',
+                visible: true,
+                messages: [],
+            };
+            obj.id = this.contacts.length + 1;
+            obj.name = this.newName;
+            obj.avatar = this.newAvatar;
+            this.contacts.unshift(obj);
+            this.newName = '';
+            this.newAvatar = '';
+            this.newchat = false;
+            console.log(this.contacts)
+
+        },
+        showAddNewChat() {
+            this.newchat = !this.newchat;
         }
 
     },
