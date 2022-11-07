@@ -54,6 +54,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 15px;
+
 }
 
 /* chat container */
@@ -63,11 +65,13 @@ button {
   width: 80vw;
   margin: 0 auto;
   display: flex;
+
 }
 
 .chat-left {
   width: 35%;
   height: 100%;
+
 }
 
 .chat-right {
@@ -86,6 +90,8 @@ button {
   align-items: center;
   background-color: var(--my-light-grey);
   border-right: 1px solid var(--my-button-grey);
+  
+
 }
 
 .my-profile-img img {
@@ -191,6 +197,7 @@ button {
 #btn-new-chat {
   position: absolute;
   right: 10px;
+  top: 3px;
 }
 
 
