@@ -21,6 +21,10 @@ const app = createApp({
             showmyprofiledropdown: false,
             chatleft: false,
             chatright: true,
+            anima: false,
+            start: false,
+            disnone: true,
+            disnoneflash: false,
             messageOption: {
                 index: null,
                 show: false
@@ -399,11 +403,23 @@ const app = createApp({
                 const name = item.name.toLowerCase();
                 return name.includes(this.searchTerm.toLowerCase());
             })
-        }
-
+        },
+        
     },
     mounted() {
+        setTimeout(()=>{
+            this.anima = true;
+        },4000);
 
+        setTimeout(()=>{
+            this.disnoneflash = true
+        },6000);
+            
+        setTimeout(()=>{
+            this.start = true;
+            this.disnone =false;
+            
+        },5900);
     }
 }).mount('#app')
 

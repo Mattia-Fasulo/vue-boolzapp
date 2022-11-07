@@ -29,7 +29,7 @@
 }
 
 body {
-  font-family: "Source Code Pro", monospace;
+  font-family: 'Josefin Sans', sans-serif;
   letter-spacing: -1px;
   background: rgb(217, 218, 212);
   background: linear-gradient(
@@ -100,13 +100,13 @@ button {
 }
 
 .my-profile-option {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin-right: 1rem;
 }
 
 .my-profile-dropdown {
   z-index: 300;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   width: max-content;
   position: absolute;
   top: 45px;
@@ -148,13 +148,13 @@ button {
 .notification-text {
   display: flex;
   flex-flow: column;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   margin-left: 0.5rem;
   font-weight: 600;
 }
 .notification-text a {
   font-weight: normal;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   color: var(--my-dark-grey);
 }
 
@@ -180,7 +180,7 @@ button {
 
 .chat-research input {
   overflow: hidden;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   width: 70%;
   appearance: none;
   border: none;
@@ -193,7 +193,9 @@ button {
   right: 10px;
 }
 
+
 .popup-new-chat {
+  font-size: 1.1rem;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -210,6 +212,7 @@ button {
 }
 
 .popup-new-chat input {
+  font-size: 1.1rem;
   text-align: center;
   padding-left: 5px;
   width: 98%;
@@ -267,7 +270,7 @@ button {
 }
 
 .chats-info span:last-child {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   color: var(--my-button-grey);
 }
 
@@ -275,7 +278,7 @@ button {
   position: absolute;
   top: 7px;
   right: 10px;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   color: var(--my-dark-grey);
 }
 
@@ -314,7 +317,7 @@ button {
 
 .chat-header-info span {
   
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   color: var(--my-dark-grey);
 }
 
@@ -324,27 +327,27 @@ button {
 }
 
 .chat-name{
-  font-size: 0.9rem !important;
+  font-size: 1.1rem !important;
   font-weight: 600 !important;
   color: black !important;
 }
 
 .chat-header-option {
   position: relative;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin-right: 2rem;
   color: var(--my-button-grey);
 }
 
 .chat-dropdown {
   padding: 10px;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   z-index: 100;
   position: absolute;
   top: 45px;
   right: -15px;
   width: max-content;
-  background-color: var(--my-white);
+  background-color: var(--my-light-grey);
   border: 1px solid var(--my-gray);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   display: flex;
@@ -371,7 +374,7 @@ button {
 
 .message {
   position: relative;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   padding: 1rem 2.5rem 1.5rem 1rem;
   max-width: 300px;
   border-radius: 0.8rem;
@@ -384,7 +387,7 @@ button {
 }
 
 .message span{
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--my-button-grey);
   position: absolute;
   bottom: 5px;
@@ -485,15 +488,66 @@ button {
   border-radius: 5px;
 }
 
+
+/* ----------splash page-------- */
+.splash {
+  padding-bottom: 20px;
+  font-size: 3vw;
+  font-weight: 700;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  width: 20vw;
+  color: white;
+  background-color: var(--my-water-green);
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  
+}
+
+.splash span:first-child{
+  margin-top: 15px;
+}
+
+/* -----------dark mode----------*/
 .darkmode {
   filter: invert(1);
 }
 
+/* ---------text big------- */
 .textbig {
   font-size: 1.3rem;
 }
 
-/* media query */
+/* -----------animation---------- */
+
+
+.animationenter {
+  animation: bounceInLeft;
+  animation-duration: 2s;
+}
+
+.anima {
+  animation: hinge;
+  animation-duration: 2s;
+}
+
+.disnone{
+  display: none;
+}
+
+.disnoneflash {
+  display: none;
+}
+
+.start {
+  animation: bounceInDown;
+  animation-duration: 2s;
+}
+/* -----------media query----------- */
 @media screen and (max-width: 992px){
   .chat-right {
     width: 55%;

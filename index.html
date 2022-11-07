@@ -12,13 +12,15 @@
   <!-- google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700;800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,700;1,200&display=swap"
     rel="stylesheet">
   <!-- bootstrp -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <!-- my style -->
   <link rel="stylesheet" href="css/style.css">
+  <!-- animation -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <!-- libreria js -->
   <script src="js/libreria.js"></script>
   <!-- libreria vue -->
@@ -30,9 +32,15 @@
 <body>
 
 
-  <div id="app" class="wrapper">
+  <div id="app" class="wrapper" >
+    <!-- splash page -->
+    <div class="splash animationenter" :class={anima,disnoneflash}>
+      <span>Welcome</span>
+      <span>in</span>
+      <span>Boothapp</span>
+    </div>
     <!-- all chat -->
-    <div class="all-chat text-big" :class={darkmode}>
+    <div class="all-chat text-big" :class={darkmode,disnone,start} >
 
       <!-- chat left -->
       <div class="chat-left" :class={chatleft}>
@@ -100,7 +108,8 @@
             <div class="chats-info">
               <span class="chat-name">{{item.name}}</span>
               <span v-if="item.messages.length > 0" class="chats-info-data">{{getLastMessage(item).date}}</span>
-              <span v-if="item.messages.length > 0">{{getLastMessage(item).message}}</span>
+              <span v-if="item.messages.length > 0" v-html="getLastMessage(item).message"></span>
+              <span v-else>Offline</span>
             </div>
           </div>
 
@@ -128,10 +137,13 @@
                   alle {{contacts[activeChat].messages.length > 0 ? getLastMessage(contacts[activeChat]).hours : ''}}
                 </span>
                 <span v-if="writing">Sta scrivendo...</span>
-              
+
                 <span v-if="online">Online</span>
               </div>
-              
+              <div class="ultimo-messaggio" v-else>
+                <span>Offline</span>
+              </div>
+
             </div>
           </div>
 
@@ -168,7 +180,7 @@
             </div>
           </div>
 
-        
+
         </div>
 
         <!-- new message -->
