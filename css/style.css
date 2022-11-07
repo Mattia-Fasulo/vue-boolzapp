@@ -498,10 +498,10 @@ button {
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  height: 30vh;
+  height: max-content;
   width: 20vw;
-  color: white;
-  background-color: var(--my-water-green);
+  color: var(--my-water-green);
+  background-color: var(--my-white);
   overflow: hidden;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -519,7 +519,7 @@ button {
 
 /* ---------text big------- */
 .textbig {
-  font-size: 1.3rem;
+  font-size: 1.8rem;
 }
 
 /* -----------animation---------- */
