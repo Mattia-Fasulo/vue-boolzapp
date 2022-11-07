@@ -35,7 +35,7 @@
     <div class="all-chat text-big" :class={darkmode}>
 
       <!-- chat left -->
-      <div class="chat-left">
+      <div class="chat-left" :class={chatleft}>
 
         <!-- my profile -->
         <div class="my-profile">
@@ -108,7 +108,7 @@
       </div>
 
       <!-- chat right -->
-      <div class="chat-right">
+      <div class="chat-right" :class={chatright}>
 
         <!-- chat header -->
         <div class="chat-header">
@@ -122,7 +122,7 @@
             <div class="chat-header-info">
               <span class="chat-name">{{contacts[activeChat].name}}</span>
               <!-- state chat active -->
-              <div id="ultimo-messaggio" v-if="(contacts[activeChat].messages.length > 0)">
+              <div class="ultimo-messaggio" v-if="(contacts[activeChat].messages.length > 0)">
                 <span v-if="!writing && !online">Ultimo accesso il {{contacts[activeChat].messages.length > 0 ?
                   getLastMessage(contacts[activeChat]).date : ''}}
                   alle {{contacts[activeChat].messages.length > 0 ? getLastMessage(contacts[activeChat]).hours : ''}}
@@ -168,12 +168,15 @@
             </div>
           </div>
 
-
+        
         </div>
 
         <!-- new message -->
         <div class="chat-new-message">
           <div class="position-relative">
+            <div class="button-return">
+              <button @click="returnBack" type="button"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
             <button @click="showEmoticon" type="button" class="mx-4"><i class="fa-regular fa-face-smile"></i></button>
 
             <!-- container emoticon -->

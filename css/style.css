@@ -318,7 +318,7 @@ button {
   color: var(--my-dark-grey);
 }
 
-#ultimo-messaggio {
+.ultimo-messaggio {
   margin-top: -5px;
   margin-bottom: -5px;
 }
@@ -358,6 +358,7 @@ button {
 
 /* ----------chat main-------- */
 .chat-main {
+  position: relative;
   padding: 2.5rem 5rem;
   height: calc(100% - 120px);
   width: 100%;
@@ -427,6 +428,7 @@ button {
 }
 
 
+
 /* -------chat new message-------- */
 .chat-new-message {
   height: 60px;
@@ -435,6 +437,15 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
+}
+
+.button-return {
+  font-size: 1rem;
+  position: absolute;
+  bottom: 50px;
+  left: 23px;
+  display: none;
   
 }
 
@@ -482,6 +493,42 @@ button {
   font-size: 1.3rem;
 }
 
+/* media query */
+@media screen and (max-width: 992px){
+  .chat-right {
+    width: 55%;
+  }
 
+  .chat-left {
+    width: 45%;
+  }
+
+  .chat-header-option .fa-magnifying-glass, .chat-header-option .fa-paperclip {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .button-return {
+    display: block;
+  }
+
+  .chatright {
+    display: none;
+  }
+
+  .chatleft {
+    display: none;
+  }
+
+  .chat-left {
+    width: 100%;
+  }
+
+  .chat-right {
+    width: 100%;
+  }
+
+}
 
 

@@ -19,6 +19,8 @@ const app = createApp({
             darkmode: false,
             textbig: false,
             showmyprofiledropdown: false,
+            chatleft: false,
+            chatright: true,
             messageOption: {
                 index: null,
                 show: false
@@ -261,7 +263,9 @@ const app = createApp({
         },
 
         setChat(id) {
-            this.activeChat = this.contacts.findIndex((item) => id === item.id)
+            this.activeChat = this.contacts.findIndex((item) => id === item.id);
+            this.chatleft = true;
+            this.chatright = false
         },
 
         sendMessage() {
@@ -382,7 +386,12 @@ const app = createApp({
         textBigOn() {
             this.textbig = !this.textbig;
             this.showmyprofiledropdown = false;
+        },
+        returnBack() {
+            this.chatleft = !this.chatleft;
+            this.chatright = !this.chatright;
         }
+    
     },
     computed: {
         findContact() {
